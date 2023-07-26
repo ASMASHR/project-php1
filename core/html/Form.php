@@ -30,6 +30,11 @@ protected function surrownd($el){
  * @return mixed|null
  */
 protected function getValue($index){
+    //return an array "fatal error canot use object of type App\entety\postEntity (data[$index])so for we should test with isobject()
+   if(is_object($this->data)) 
+   {
+    return $this->data->$index;
+   }
     return isset($this->data[$index])?$this->data[$index] : null;
 }
 public function input($name,$label,$option=[]){

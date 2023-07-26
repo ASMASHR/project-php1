@@ -25,10 +25,30 @@ elseif($page==="single.post"){
     require ROOT .'/pages/admin/posts/Article.php';
 }
 elseif($page==="post.category"){
-    require ROOT .'/pages/admin/posts/edit.php';
+    require ROOT .'/pages/admin/posts/categorie.php';
+}
+elseif($page==="posts.add"){
+    require ROOT .'/pages/admin/posts/add.php';
+}
+elseif($page==="posts.delete"){
+    require ROOT .'/pages/admin/posts/delete.php';
 }
 elseif($page==="posts.edit"){
-    require ROOT .'/pages/admin/posts/categorie.php';
+    require ROOT .'/pages/admin/posts/edit.php';
+}
+//categories
+if($page==='categorieshome'){
+    require ROOT .'/pages/admin/categories/index.php';
+}
+
+elseif($page==="category.add"){
+    require ROOT .'/pages/admin/categories/add.php';
+}
+elseif($page==="category.delete"){
+    require ROOT .'/pages/admin/categories/delete.php';
+}
+elseif($page==="category.edit"){
+    require ROOT .'/pages/admin/categories/edit.php';
 }
 $content=ob_get_clean();
 require ROOT.'/pages/templates/default.php';

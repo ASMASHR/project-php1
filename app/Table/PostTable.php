@@ -17,8 +17,8 @@ class PostTable extends Table {
             ORDER BY blog.date DESC ")
             ;
     }
-    public function find($id){
-        return $this->query("SELECT blog.id, titre,contenu,categories.nom as categorie,categories.id as categoryId 
+    public function findByCategory($id){
+        return $this->query("SELECT blog.id, titre,contenu,blog.categoryId,categories.nom as categorie,categories.id as categoryId 
         FROM blog 
         LEFT JOIN categories 
             ON categoryId=categories.id

@@ -44,7 +44,11 @@ class MySqlDb extends Database{
     }
     public function prepare($statement,$att,$class_name=null,$one=false){
         $req=$this->getPDO()->prepare($statement);
-    $req->execute($att);
+    $res=$req->execute($att);
+    if((strpos($statement,'UPDATE')===0)||(strpos($statement,'INSERT')===0)||(strpos($statement,'DELETE')===0)){
+        return $req;
+
+    }
     if($class_name===null)
         $req->setFetchMode(PDO::FETCH_OBJ);
         else
@@ -57,5 +61,8 @@ class MySqlDb extends Database{
     $res=$req->fetchAll();
     
     return $res; 
-    }   
+    }  
+    public function lastInsertId(){
+        return $this->getPDO()->lastInsertId();
+    } 
 }

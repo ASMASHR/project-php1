@@ -43,5 +43,58 @@ class Table {
         {$this->table}
         WHERE id = ?" ,[$id],true );
     }
- 
+    public function update($id,$fields){
+        $parts=[];
+        $attributs=[];
+        foreach($fields as $k=>$v){
+            $parts[]="$k=?";
+            $attributs=$v;
+        }
+        $attributs[]=$id;
+        $sql_part=implode(',',$parts);
+        return $this->query("
+        UPDATE 
+        {$this->table}
+        SET 
+        $sql_part 
+        WHERE id = ?" , $attributs,true );
+    } 
+    public function create($fields){
+        $parts=[];
+        $attributs=[];
+        foreach($fields as $k=>$v){
+            $parts[]="$k=?";
+            $attributs=$v;
+        }
+        $sql_part=implode(',',$parts);
+        return $this->query("
+        INSERT 
+        {$this->table}
+        SET 
+        $sql_part " , $attributs,true );
+    } 
+    public function delete($id){
+        
+        return $this->query("
+        DELETE 
+        {$this->table}
+       
+        WHERE id = ?" , [$id],true );
+    }
+    /**
+     * Summary of extactList used instead of all() to return an array instead of entity object 
+     * @param mixed $key
+     * @param mixed $value
+     * @return array<string>
+     */
+    public function extactList($key,$value){
+        $records=$this->all();  
+        $result=[];
+        foreach($records as $v){
+            $result[$v->$key]="$v->$value";
+           
+        }
+        return $result;
+
+    }
 }
